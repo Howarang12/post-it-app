@@ -39,10 +39,10 @@ const SignIn = () => {
 					Sign In
 				</button>
 
-				<div class="relative flex py-5 items-center">
-					<div class="flex-grow border-t border-gray-400"></div>
-					<span class="flex-shrink mx-4 text-gray-400">Or</span>
-					<div class="flex-grow border-t border-gray-400"></div>
+				<div className="relative flex py-5 items-center">
+					<div className="flex-grow border-t border-gray-400"></div>
+					<span className="flex-shrink mx-4 text-gray-400">Or</span>
+					<div className="flex-grow border-t border-gray-400"></div>
 				</div>
 
 				<button className='bg-green-500 hover:bg-green-400 text-white font-bold py-4 px-8 border-b-4 border-green-700 hover:border-green-500 rounded  m-9' onClick={() => console.log('sign in')}>
