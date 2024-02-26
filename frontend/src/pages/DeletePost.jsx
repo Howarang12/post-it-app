@@ -9,8 +9,19 @@ const DeletePost = () => {
   const navigate = useNavigate();
   const { id } = useParams()
 
-	const handleDeleteBook = () => {
+	const handleDeletePost = () => {
     console.log('delete')
+    setLoading(true)
+    axios
+      .delete(`http://localhost:5555/posts/${id}`) // <-- replace url
+      .then(() => {
+        setLoading(false)
+        navigate('/')
+      })
+      .catch((error) => {
+        setLoading(false)
+        console.log(error)
+      })
   }
 
 	return (
@@ -23,7 +34,7 @@ const DeletePost = () => {
 
         <button
           className='p-4 bg-red-600 text-white m-8 w-full'
-          onClick={handleDeleteBook}
+          onClick={handleDeletePost}
         >
           Yes, Delete it
         </button>

@@ -20,20 +20,20 @@ const CreatePost = () => {
 			text
 		}
 		navigate('/')
-		// setLoading(true)
+		setLoading(true)
 
 		// axios request to microservice
-    // axios
-    //   .post('microservice url here', data)
-    //   .then(() => {
-    //     setLoading(false)
-    //     navigate('/')
-    //   })
-    //   .catch((error) => {
-    //     setLoading(false)
-    //     // alert('An error happened. Please Check console')
-    //     console.log(error);
-    //   });
+    axios
+      .post(`http://localhost:5555/posts`, data) // <-- edit url here
+      .then(() => {
+        setLoading(false)
+        navigate('/')
+      })
+      .catch((error) => {
+        setLoading(false)
+        // alert('An error happened. Please Check console')
+        console.log(error);
+      });
 
 
 	}
