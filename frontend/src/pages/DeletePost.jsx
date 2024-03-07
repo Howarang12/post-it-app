@@ -13,7 +13,7 @@ const DeletePost = () => {
     console.log('delete')
     setLoading(true)
     axios
-      .delete(`http://localhost:5555/posts/${id}`) // <-- replace url
+      .delete(`http://localhost:3000/posts/${id}`) // <-- replace url
       .then(() => {
         setLoading(false)
         navigate('/')

@@ -10,7 +10,7 @@ import Profile from './pages/Profile.jsx'
 function App() {
   return(
     <>
-    <Navbar />
+      <Navbar />
       <Routes>
         <Route path='/' element={<Home/>} />
         <Route path='/profile' element={<Profile/>} />

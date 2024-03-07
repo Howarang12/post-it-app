@@ -14,47 +14,47 @@ const EditPost = () => {
 	const navigate = useNavigate()
 	const {id} = useParams()
 
-	useEffect(() => {
-		setLoading(true)
-		axios
-			.get(`http://localhost:5555/posts/${id}`) // <-- replace url here
-			.then((response) => {
-				setUser(response.data.author)
-				setTitle(response.data.title)
-				setText(response.data.text)
-			})
-			.catch((error) => {
-				setLoading(false)
-				console.log(error)
-			})
-	})
+	// useEffect(() => {
+	// 	setLoading(true)
+	// 	axios
+	// 		.get(`http://localhost:5555/posts/${id}`) // <-- replace url here
+	// 		.then((response) => {
+	// 			setUser(response.data.author)
+	// 			setTitle(response.data.title)
+	// 			setText(response.data.text)
+	// 		})
+	// 		.catch((error) => {
+	// 			setLoading(false)
+	// 			console.log(error)
+	// 		})
+	// })
 
 	const handleEditPost = () => {
-
+		console.log('edit')
 	}
 	
-	// const dummy = [{
-	// 	id: 1,
-	// 	user: 'John Doe',
-	// 	title: 'Dummy Post',
-	// 	text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed earum doloribus corporis consectetur non reprehenderit natus numquam, amet exercitationem architecto, atque quis. Animi sed, placeat nisi rem quibusdam ducimus voluptas numquam deserunt.',
-	// 	likes: 0,
-	// 	replies: 0
-	// 	},
-	// 	{
-	// 	id: 2,
-	// 	user: 'Jane Doe',
-	// 	title: 'Dummy Post 2',
-	// 	text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum ut magni et odit? Dignissimos quod incidunt omnis architecto quibusdam eveniet!',
-	// 	likes: 0,
-	// 	replies: 0
-	// 	},
-	// ]
-	// useEffect(() => {
-  //   setUser(dummy[id-1].user)
-	// 	setTitle(dummy[id-1].title)
-	// 	setText(dummy[id-1].text)
-  // }, [])
+	const dummy = [{
+		id: 1,
+		user: 'John Doe',
+		title: 'Dummy Post',
+		text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed earum doloribus corporis consectetur non reprehenderit natus numquam, amet exercitationem architecto, atque quis. Animi sed, placeat nisi rem quibusdam ducimus voluptas numquam deserunt.',
+		likes: 0,
+		replies: 0
+		},
+		{
+		id: 2,
+		user: 'Jane Doe',
+		title: 'Dummy Post 2',
+		text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum ut magni et odit? Dignissimos quod incidunt omnis architecto quibusdam eveniet!',
+		likes: 0,
+		replies: 0
+		},
+	]
+	useEffect(() => {
+    setUser(dummy[id-1].user)
+		setTitle(dummy[id-1].title)
+		setText(dummy[id-1].text)
+  }, [])
 
 	return (
 		<div className='p-4'>

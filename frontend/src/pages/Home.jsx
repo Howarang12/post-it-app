@@ -15,9 +15,9 @@ const Home = () => {
 	useEffect(() => {
     setLoading(true)
     axios
-      .get('http://localhost:5555/posts')
+      .get('http://localhost:3000/api/posts')
       .then((response) => {
-        setPosts(response.data.data)
+        setPosts(response.data)
         setLoading(false)
       })
       .catch((error) => {
@@ -27,7 +27,7 @@ const Home = () => {
   }, [])
 
 	// const dummy = [{
-	// 	id: 1,
+	// 	postID: 1,
 	// 	user: 'John Doe',
 	// 	title: 'Dummy Post',
 	// 	text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed earum doloribus corporis consectetur non reprehenderit natus numquam, amet exercitationem architecto, atque quis. Animi sed, placeat nisi rem quibusdam ducimus voluptas numquam deserunt.',
@@ -35,7 +35,7 @@ const Home = () => {
 	// 	replies: 0
 	// 	},
 	// 	{
-	// 	id: 2,
+	// 	postID: 2,
 	// 	user: 'Jane Doe',
 	// 	title: 'Dummy Post 2',
 	// 	text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum ut magni et odit? Dignissimos quod incidunt omnis architecto quibusdam eveniet!',
@@ -60,7 +60,7 @@ const Home = () => {
 					<FaSearch />	
         </button>
       </div>
-			<PostList posts={posts}/>
+			<PostList posts={posts}/> 
 		</>
 	)
 }
