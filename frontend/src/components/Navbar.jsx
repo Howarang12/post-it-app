@@ -1,16 +1,17 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useAuthContext } from '../hooks/useAuthContext'
 
 const Navbar = () => {
 	const { dispatch, user } = useAuthContext()
-
+	const navigate = useNavigate()
+	
 	const handleLogout = () => {
 		// remove user from local storage
 		localStorage.removeItem('user')
-		
 		// dispatch logout action
 		dispatch({type: 'LOGOUT'})
+		navigate('/signin')
 	}
 
 	return (
@@ -29,7 +30,7 @@ const Navbar = () => {
 					{ user && 
 					<li className='mx-4 my-6 md:my-0'>
 						<Link to='/profile' className='text-xl hover:text-blue-500 duration-500'>
-							Profile
+							{user.username}
 						</Link>
 					</li>
 					}
@@ -41,9 +42,8 @@ const Navbar = () => {
 							</li>
 						</Link> : 
 
-						<button className='bg-blue-500 hover:bg-blue-400 text-white py-2 px-3 border-b-4 border-blue-700 hover:border-blue-500 rounded w-1/2 mx-4 my-6 md:my-0 text-xl' onClick={handleLogout}>Logout {user.username}</button>
+						<button className='bg-blue-500 hover:bg-blue-400 text-white py-2 px-3 border-b-4 border-blue-700 hover:border-blue-500 rounded w-1/2 mx-4 my-6 md:my-0 text-xl' onClick={handleLogout}>Logout</button>
 					}
-					
 					
 				</ul>
 			</div>

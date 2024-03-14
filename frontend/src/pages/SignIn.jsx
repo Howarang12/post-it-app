@@ -97,7 +97,7 @@ const SignIn = () => {
 				<div className="my-4">
 					<lable className="text-xl mr-4 text-black">Password</lable>
 					<input 
-						type="text" 
+						type="password" 
 						value={passwordLog}
 						onChange={(e) => setPasswordLog(e.target.value)}
 						className="border-2 border-gray-950 px-4 py-2 mt-1 w-full rounded-md"

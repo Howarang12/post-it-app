@@ -3,20 +3,30 @@ import BackButton from '../components/BackButton';
 import Spinner from '../components/Spinner';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useAuthContext } from '../hooks/useAuthContext';
 
 const DeletePost = () => {
 	const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { id } = useParams()
+  const { user } = useAuthContext()
 
 	const handleDeletePost = () => {
     console.log('delete')
     setLoading(true)
+
+    if (!user) return
+    
     axios
-      .delete(`http://localhost:3000/posts/${id}`) // <-- replace url
+      .delete(`http://localhost:3000/api/posts/${id}`, {
+				headers: {
+					'Authorization': `Bearer ${user.token}`
+				}
+			}) 
       .then(() => {
         setLoading(false)
         navigate('/')
+        location.reload()
       })
       .catch((error) => {
         setLoading(false)
