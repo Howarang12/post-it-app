@@ -26,7 +26,7 @@ const Home = () => {
 
 	return (
 		<>
-			<h1 className='text-3xl my-4'>All Posts</h1>
+			<h1 className='text-3xl my-4 p-4'>All Posts</h1>
 			<div className='container py-10 px-10 mx-0 min-w-full flex flex-col items-center'>
 				{user &&
 				<button className='bg-blue-500 hover:bg-blue-400 text-white font-bold py-4 px-8 border-b-4 border-blue-700 hover:border-blue-500 rounded w-1/2 m-9'

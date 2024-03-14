@@ -26,6 +26,11 @@ const SingleComment = ({comment}) => {
 			})
 	}
 
+	const handleToggleEdit = () => {
+		setEditing(!editing)
+		setBody(comment.body)
+	}
+
 	return (
 		<article className="px-12 py-6 text-base border-2 m-3">
 			<div className="flex justify-between items-center mb-2">
@@ -44,15 +49,16 @@ const SingleComment = ({comment}) => {
 								placeholder='Add a comment'
 							/>
 							<button type="submit" className='bg-green-500 hover:bg-green-400 text-white font-bold py-3 px-8 border-b-4 border-green-700 hover:border-green-500 rounded ml-5'>Update</button>
+							<button type="submit" className='bg-red-500 hover:bg-red-400 text-white font-bold py-3 px-8 border-b-4 border-red-700 hover:border-red-500 rounded ml-5' onClick={handleToggleEdit}>Cancel</button>
 					</form> 
 					:
-					<p className="">{body}</p>
+					<p className="">{comment.body}</p>
 			}
 			
 			
 			{user && user.userID == comment.userID &&
 				<div className='flex mt-2'>
-					<span onClick={() => setEditing(!editing)}><AiOutlineEdit className='mt-1'/></span>
+					<span onClick={handleToggleEdit}><AiOutlineEdit className='mt-1'/></span>
 					<Link to={`/comments/delete/${comment.commentID}`} className='pl-4'>
 						<span><MdOutlineDelete className='mt-1'/></span>
 					</Link>
