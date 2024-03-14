@@ -2,9 +2,30 @@ import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom'
 import BackButton from '../components/BackButton'
+import PostList from '../components/PostList'
+import { useAuthContext } from '../hooks/useAuthContext'
 
 const Profile = () => {
 	const navigate = useNavigate()
+	const {user} = useAuthContext()
+	const [userPosts, setUserPosts] = useState([])
+
+
+	useEffect(() => {
+		axios.get(`http://localhost:3000/api/posts/user/${user.userID}`, {
+			headers: {
+				'Authorization': `Bearer ${user.token}`
+			}
+			})
+			.then((response) => {
+				setUserPosts(response.data.reverse())
+				console.log(response.data)
+			})
+			.catch((error) => {
+				console.log(error)
+			})
+	}, [])
+
 	return (
 		<div className="p-4">
 			<BackButton />
@@ -15,6 +36,7 @@ const Profile = () => {
 						Create Post
 					</button>
 			</div>
+			<PostList posts={userPosts}/>
 		</div>
 	)
 }

@@ -39,7 +39,6 @@ const EditPost = () => {
 			.catch((error) => {
 				console.log(error)
 			})
-
 	}
 	
 	return (

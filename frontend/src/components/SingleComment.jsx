@@ -8,6 +8,23 @@ import { useAuthContext } from '../hooks/useAuthContext'
 
 const SingleComment = ({comment}) => {
 	const {user} = useAuthContext()
+	const [editing, setEditing] = useState(false)
+	const [body, setBody] = useState(comment.body)
+
+	const handleUpdateComment = () => {
+		if (!user) return
+		axios.put(`http://localhost:3000/api/comments/${comment.commentID}`, {body}, {
+			headers: {
+				'Authorization': `Bearer ${user.token}`
+			}
+			})
+			.then((response) => {
+				console.log(response.data.message)
+			})
+			.catch((error) => {
+				console.log(error)
+			})
+	}
 
 	return (
 		<article className="px-12 py-6 text-base border-2 m-3">
@@ -17,11 +34,25 @@ const SingleComment = ({comment}) => {
 							<p className="text-sm ">{new Date(comment.createdAt).toLocaleDateString()}</p>
 					</div> 
 			</div>
-			<p className="">{comment.body}</p>
+			{editing ?
+					<form onSubmit={handleUpdateComment} className=' flex'>
+							<input 
+								type="text" 
+								value={body}
+								onChange={(e) => setBody(e.target.value)}
+								className="border-2 border-gray-950 px-4 py-2 mt-1 w-full rounded-md"
+								placeholder='Add a comment'
+							/>
+							<button type="submit" className='bg-green-500 hover:bg-green-400 text-white font-bold py-3 px-8 border-b-4 border-green-700 hover:border-green-500 rounded ml-5'>Update</button>
+					</form> 
+					:
+					<p className="">{body}</p>
+			}
+			
 			
 			{user && user.userID == comment.userID &&
 				<div className='flex mt-2'>
-					<span><AiOutlineEdit className='mt-1'/></span>
+					<span onClick={() => setEditing(!editing)}><AiOutlineEdit className='mt-1'/></span>
 					<Link to={`/comments/delete/${comment.commentID}`} className='pl-4'>
 						<span><MdOutlineDelete className='mt-1'/></span>
 					</Link>

@@ -9,6 +9,7 @@ const SignIn = () => {
 	const [usernameReg, setUsernameReg] = useState('')
 	const [emailReg, setEmailReg] = useState('')
 	const [passwordReg, setPasswordReg] = useState('')
+	const [passwordRegConfirm, setPasswordRegConfirm] = useState('')
 	const [emailLog, setEmailLog] = useState('')
 	const [passwordLog, setPasswordLog] = useState('')
 	const [loading, setLoading] = useState(false)
@@ -20,6 +21,10 @@ const SignIn = () => {
 	axios.defaults.withCredentials = true
 
 	const handleRegistration = () => {
+		if (passwordReg != passwordRegConfirm) {
+			setErrorReg('Passwords do not match')
+			return
+		}
 		const data = {
 				username: usernameReg,
 				email: emailReg,
@@ -143,9 +148,19 @@ const SignIn = () => {
 				<div className="my-4">
 					<lable className="text-xl mr-4 text-black">Password</lable>
 					<input 
-						type="text" 
+						type="password" 
 						value={passwordReg}
 						onChange={(e) => setPasswordReg(e.target.value)}
+						className="border-2 border-gray-950 px-4 py-2 mt-1 w-full rounded-md"
+					/>
+				</div>
+
+				<div className="my-4">
+					<lable className="text-xl mr-4 text-black">Confirm Password</lable>
+					<input 
+						type="password" 
+						value={passwordRegConfirm}
+						onChange={(e) => setPasswordRegConfirm(e.target.value)}
 						className="border-2 border-gray-950 px-4 py-2 mt-1 w-full rounded-md"
 					/>
 				</div>
