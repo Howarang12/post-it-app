@@ -8,6 +8,7 @@ import SignIn from './pages/SignIn.jsx'
 import Profile from './pages/Profile.jsx'
 import Footer from './components/Footer.jsx'
 import ViewPost from './pages/ViewPost.jsx'
+import DeleteComment from './pages/DeleteComment.jsx'
 import { useAuthContext } from './hooks/useAuthContext.js'
 
 
@@ -45,6 +46,10 @@ function App() {
         <Route 
           path='/posts/delete/:id' 
           element={user ? <DeletePost/> : <Navigate to='/signin'/>} 
+        />
+                <Route 
+          path='/comments/delete/:id' 
+          element={user ? <DeleteComment/> : <Navigate to='/signin'/>} 
         />
       </Routes>
       <Footer />

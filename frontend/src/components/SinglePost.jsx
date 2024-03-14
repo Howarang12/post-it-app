@@ -14,12 +14,20 @@ const SinglePost = ({post}) => {
 	const { user } = useAuthContext()
 
 	const handleLike = () => {
+
+		if (!user) return 
+
 		const data = {
 			userID: user.userID,
 			postID: post.postID
 		}
 
-		axios.post(`http://localhost:3000/api/posts/${post.postID}/like`, data)
+		axios
+			.post(`http://localhost:3000/api/posts/${post.postID}/like`, data, {
+				headers: {
+					'Authorization': `Bearer ${user.token}`
+				}
+			})
 			.then((response) =>{
 				axios.get(`http://localhost:3000/api/posts/${post.postID}/likes`)
 					.then((response) =>{
@@ -34,7 +42,7 @@ const SinglePost = ({post}) => {
 			})
 	}
 
-
+	// get username
 	useEffect(() => {
     axios
       .get(`http://localhost:3000/api/users/${post.userID}`)
@@ -45,11 +53,23 @@ const SinglePost = ({post}) => {
         console.log(error)
       })
 
-		axios.get(`http://localhost:3000/api/posts/${post.postID}/likes`)
-		.then((response) =>{
-			setLikeCount(response.data.totalLikes)
+		//load like count
+		axios
+			.get(`http://localhost:3000/api/posts/${post.postID}/likes`)
+			.then((response) =>{
+				setLikeCount(response.data.totalLikes)
+			})
+			.catch((error) =>{
+				console.log(error)
+			})
+		
+		// load comment count
+		axios
+		.get(`http://localhost:3000/api/comments/${post.postID}`)
+		.then((response) => {
+			setCommentCount(response.data.length)
 		})
-		.catch((error) =>{
+		.catch((error) => {
 			console.log(error)
 		})
   }, [])
@@ -58,8 +78,12 @@ const SinglePost = ({post}) => {
 
 	return (
 		<div className='border-2 border-blue-500 rounded-lg px-6 py-3 m-6 relative hover:shadow-xl'>
-			<h2 className='absolute top-1 left-2 px-4 py-1 text-xl font-bold'>{post.title}</h2>
-			<h4 className='mt-6 mb-3'>{username}</h4>
+			<Link to={`/posts/${post.postID}`}>
+				<h2 className='absolute top-1 left-2 px-4 py-1 text-xl font-bold'>{post.title}</h2>
+			</Link>
+			<div className='flex justify-between items-center'>
+				<h4 className='mt-6 font-semibold'>{username}</h4> <p className="text-sm mb-3">{new Date(post.createdAt).toLocaleDateString()}</p>
+			</div>
 			<p>{post.text}</p>
 			<div className="flex justify-between item-center-gap-x-2 mt-4">
 				<div className='flex'>
