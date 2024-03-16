@@ -10,6 +10,7 @@ import Footer from './components/Footer.jsx'
 import ViewPost from './pages/ViewPost.jsx'
 import DeleteComment from './pages/DeleteComment.jsx'
 import { useAuthContext } from './hooks/useAuthContext.js'
+import About from './pages/About.jsx'
 
 
 function App() {
@@ -22,6 +23,10 @@ function App() {
         <Route 
           path='/' 
           element={<Home/>} 
+        />
+        <Route 
+          path='/about' 
+          element={<About/>} 
         />
         <Route 
           path='/profile' 

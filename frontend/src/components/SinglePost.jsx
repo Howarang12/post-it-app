@@ -28,7 +28,7 @@ const SinglePost = ({post}) => {
 					'Authorization': `Bearer ${user.token}`
 				}
 			})
-			.then((response) =>{
+			.then((response) => {
 				axios.get(`http://localhost:3000/api/posts/${post.postID}/likes`)
 					.then((response) =>{
 						setLikeCount(response.data.totalLikes)

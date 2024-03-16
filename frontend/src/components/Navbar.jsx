@@ -27,6 +27,12 @@ const Navbar = () => {
 						</Link>
 					</li>
 
+					<li className='mx-4 my-6 md:my-0'>
+						<Link to='/about' className='text-xl hover:text-blue-500 duration-500'>
+							About
+						</Link>
+					</li>
+
 					{ user && 
 					<li className='mx-4 my-6 md:my-0'>
 						<Link to='/profile' className='text-xl hover:text-blue-500 duration-500'>
